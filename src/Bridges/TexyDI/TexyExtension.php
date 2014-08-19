@@ -3,6 +3,7 @@
 namespace Nette\Bridges\TexyDI;
 
 use Nette\DI\CompilerExtension,
+	Nette\Utils\Validators,
 	Nette\InvalidStateException;
 
 
@@ -24,7 +25,8 @@ class TexyExtension extends CompilerExtension
 		
 		$texy = $builder->addDefinition($this->prefix('texy'))
 			->setClass('Texy\Texy');
-		
+
+		Validators::assertField($config, 'safeMode', 'boolean');
 		if ($config['safeMode']) {
 			$texy->addSetup('TexyConfigurator::safeMode', array('@self'));
 		}
