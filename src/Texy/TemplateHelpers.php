@@ -13,7 +13,7 @@ class TemplateHelpers extends Object
 	protected $texy;
 	
 	
-	public function __construct(Texy $texy)
+	public function __construct(\Texy $texy)
 	{
 		$this->texy = $texy;
 	}
