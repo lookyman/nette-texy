@@ -1,0 +1,23 @@
+{
+    "name": "lookyman/nette-texy",
+    "description": "Texy integration into Nette",
+    "keywords": ["Nette", "Texy"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lukáš Unger",
+            "email": "looky.msc@gmail.com"
+        }
+    ],
+    "require": {
+        "nette/di": "~2.2.0",
+        "nette/utils": "~2.2.1",
+        "texy/texy": "~2.6.0"
+    },
+    "require-dev": {
+        "nette/tester": "~1.2.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
