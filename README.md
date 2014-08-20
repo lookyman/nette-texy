@@ -11,7 +11,7 @@ Installation
 The best way to install Nette Texy! is using the [Composer](http://getcomposer.org/):
 
 ```sh
-$ composer require lookyman/nette-texy:~0.1.0
+$ composer require lookyman/nette-texy:~0.2.0
 ```
 
 Enable the extension using your neon config:
