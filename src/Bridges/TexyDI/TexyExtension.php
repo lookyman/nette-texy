@@ -40,8 +40,19 @@ class TexyExtension extends CompilerExtension
 			? $builder->getDefinition('nette.latteFactory')
 			: $builder->getDefinition('nette.latte');
 
-		$latteFactory
-			->addSetup('addFilter', array('texy', array($this->prefix('@helpers'), 'process')));
+		$latteFactory->addSetup('addFilter', array('texy', array($this->prefix('@helpers'), 'process')));
+	}
+	
+	
+	public function beforeCompile()
+	{
+		$builder = $this->getContainerBuilder();
+		
+		$texy = $builder->getDefinition($this->prefix('texy'));
+		foreach ($builder->findByTag($this->prefix('configurator')) as $name => $foo) {
+			$texy->addSetup('addConfigurator', array("@$name"));
+		}
+		$texy->addSetup('configure');
 	}
 	
 	
