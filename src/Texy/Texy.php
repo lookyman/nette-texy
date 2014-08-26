@@ -52,11 +52,17 @@ class Texy extends \Texy
 		$key = array($text, $singleLine);
 		$cache = new Cache($this->storage, str_replace('\\', '.', get_class()));
 		if (NULL === ($html = $cache->load($key))) {
-			$html = parent::process($text, $singleLine);
+			$html = $this->processUncached($text, $singleLine);
 			$cache->save($key, $html);
 		}
 		
 		return $html;
+	}
+	
+	
+	public function processUncached($text, $singleLine = FALSE)
+	{
+		return parent::process($text, $singleLine);
 	}
 	
 }
