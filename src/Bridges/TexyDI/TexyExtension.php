@@ -35,12 +35,6 @@ class TexyExtension extends CompilerExtension
 			->setClass('Texy\TemplateHelpers')
 			->setFactory($this->prefix('@texy') . '::createTemplateHelpers')
 			->setInject(FALSE);
-		
-		$latteFactory = $builder->hasDefinition('nette.latteFactory')
-			? $builder->getDefinition('nette.latteFactory')
-			: $builder->getDefinition('nette.latte');
-
-		$latteFactory->addSetup('addFilter', array('texy', array($this->prefix('@helpers'), 'process')));
 	}
 	
 	
@@ -50,9 +44,17 @@ class TexyExtension extends CompilerExtension
 		
 		$texy = $builder->getDefinition($this->prefix('texy'));
 		foreach ($builder->findByTag($this->prefix('configurator')) as $name => $foo) {
+			$builder->getDefinition($name)->setAutowired(FALSE)->setInject(FALSE);
+			//$texy->addSetup('?->configure($service)', array("@$name"));
 			$texy->addSetup('addConfigurator', array("@$name"));
 		}
 		$texy->addSetup('configure');
+		
+		$latteFactory = $builder->hasDefinition('nette.latteFactory')
+			? $builder->getDefinition('nette.latteFactory')
+			: $builder->getDefinition('nette.latte');
+
+		$latteFactory->addSetup('addFilter', array('texy', array($this->prefix('@helpers'), 'process')));
 	}
 	
 	

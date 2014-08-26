@@ -23,10 +23,9 @@ class TemplateHelpers extends Object
 	 * @param string
 	 * @return \Nette\Utils\Html
 	 */
-	public function process($text)
+	public function process($text, $singleLine = FALSE)
 	{
-		return Html::el()
-			->setHtml($this->texy->process($text));
+		return Html::el()->setHtml($this->texy->process($text, $singleLine));
 	}
 	
 }
