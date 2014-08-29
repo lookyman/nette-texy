@@ -45,7 +45,6 @@ class TexyExtension extends CompilerExtension
 		$texy = $builder->getDefinition($this->prefix('texy'));
 		foreach ($builder->findByTag($this->prefix('configurator')) as $name => $foo) {
 			$builder->getDefinition($name)->setAutowired(FALSE)->setInject(FALSE);
-			//$texy->addSetup('?->configure($service)', array("@$name"));
 			$texy->addSetup('addConfigurator', array("@$name"));
 		}
 		$texy->addSetup('configure');
