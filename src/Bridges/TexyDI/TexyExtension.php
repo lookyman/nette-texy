@@ -3,7 +3,7 @@
 namespace Nette\Bridges\TexyDI;
 
 use Nette\DI\CompilerExtension;
-use	Nette\Utils\Validators;
+use Nette\Utils\Validators;
 
 
 class TexyExtension extends CompilerExtension
