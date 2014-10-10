@@ -2,28 +2,28 @@
 
 namespace Texy;
 
-use Nette\Caching\IStorage,
-	Nette\Caching\Cache;
+use Nette\Caching\IStorage;
+use Nette\Caching\Cache;
 
 
 class Texy extends \Texy
 {
-	
+
 	/** @var \Texy\ITexyConfigurator[] */
 	protected $configurators = array();
-	
-	
+
+
 	/** @var \Nette\Caching\IStorage */
 	protected $storage;
-	
-	
+
+
 	public function __construct(IStorage $storage)
 	{
 		parent::__construct();
 		$this->storage = $storage;
 	}
-	
-	
+
+
 	/**
 	 * @return \Texy\TemplateHelpers
 	 */
@@ -31,22 +31,22 @@ class Texy extends \Texy
 	{
 		return new TemplateHelpers($this);
 	}
-	
-	
+
+
 	public function addConfigurator(ITexyConfigurator $configurator)
 	{
 		$this->configurators[] = $configurator;
 	}
-	
-	
+
+
 	public function configure()
 	{
 		foreach ($this->configurators as $configurator) {
 			$configurator->configure($this);
 		}
 	}
-	
-	
+
+
 	public function process($text, $singleLine = FALSE)
 	{
 		$key = array($text, $singleLine);
@@ -55,14 +55,14 @@ class Texy extends \Texy
 			$html = $this->processUncached($text, $singleLine);
 			$cache->save($key, $html);
 		}
-		
+
 		return $html;
 	}
-	
-	
+
+
 	public function processUncached($text, $singleLine = FALSE)
 	{
 		return parent::process($text, $singleLine);
 	}
-	
+
 }
