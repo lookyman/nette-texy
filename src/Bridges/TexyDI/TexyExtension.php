@@ -64,6 +64,7 @@ class TexyExtension extends CompilerExtension
 			: $builder->getDefinition('nette.latte');
 
 		$latteFactory->addSetup('addFilter', array('texy', array($this->prefix('@helpers'), 'process')));
+		$latteFactory->addSetup('addFilter', array('texyUncached', array($this->prefix('@helpers'), 'processUncached')));
 	}
 
 
