@@ -2,6 +2,7 @@
 
 namespace Nette\Bridges\TexyDI;
 
+use Nette;
 use Nette\DI\CompilerExtension;
 use Nette\Utils\Validators;
 
@@ -86,7 +87,7 @@ class TexyExtension extends CompilerExtension
 	{
 		if ($extra = array_diff_key($config, $expected)) {
 			$extra = implode(", $name.", array_keys($extra));
-			throw new InvalidStateException("Unknown option $name.$extra.");
+			throw new Nette\InvalidStateException("Unknown option $name.$extra.");
 		}
 	}
 
