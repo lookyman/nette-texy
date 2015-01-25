@@ -2,6 +2,7 @@
 
 namespace Texy;
 
+use Nette;
 use Nette\Object;
 use Nette\Utils\Html;
 
@@ -36,7 +37,7 @@ class TemplateHelpers extends Object
 	public function processUncached($text, $singleLine = FALSE)
 	{
 		if (!$this->texy instanceof Texy) {
-			throw new \Nette\InvalidStateException("Texy is not an instance of Texy\Texy.");
+			throw new Nette\InvalidStateException('Texy is not an instance of Texy\Texy.');
 		}
 		return Html::el()->setHtml($this->texy->processUncached($text, $singleLine));
 	}
