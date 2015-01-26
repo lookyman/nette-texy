@@ -51,10 +51,9 @@ class Texy extends \Texy
 	{
 		$key = array($text, $singleLine);
 		$cache = new Cache($this->storage, str_replace('\\', '.', get_class()));
-		if (NULL === ($html = $cache->load($key))) {
-			$html = $this->processUncached($text, $singleLine);
-			$cache->save($key, $html);
-		}
+		$html = $cache->load($key, function () use ($text, $singleLine) {
+			return $this->processUncached($text, $singleLine);
+		});
 
 		return $html;
 	}
