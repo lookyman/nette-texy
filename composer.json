@@ -10,10 +10,10 @@
 		}
 	],
 	"require": {
-		"nette/di": "~2.2.0",
-		"nette/caching": "~2.2.1",
-		"nette/utils": "~2.2.1",
-		"texy/texy": "~2.6.0"
+		"nette/di": "~2.2",
+		"nette/caching": "~2.2",
+		"nette/utils": "~2.2",
+		"texy/texy": "~2.6"
 	},
 	"require-dev": {
 		"nette/tester": "~1.2.0"
