@@ -1,24 +1,36 @@
 {
-	"name": "lookyman/nette-texy",
-	"description": "Texy! integration into Nette Framework",
-	"keywords": ["Nette", "Texy"],
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Lukáš Unger",
-			"email": "looky.msc@gmail.com"
-		}
-	],
-	"require": {
-		"nette/di": "~2.2",
-		"nette/caching": "~2.2",
-		"nette/utils": "~2.2",
-		"texy/texy": "~2.6 <2.8"
-	},
-	"require-dev": {
-		"nette/tester": "~1.2.0"
-	},
-	"autoload": {
-		"classmap": ["src/"]
-	}
+  "name": "lookyman/nette-texy",
+  "description": "Texy integration into Nette Framework",
+  "keywords": ["Nette", "Texy"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Lukáš Unger",
+      "email": "looky.msc@gmail.com",
+      "homepage": "https://lookyman.net"
+    }
+  ],
+  "require": {
+    "php": ">=5.6",
+    "nette/di": "^2.3",
+    "texy/texy": "^2.8"
+  },
+  "require-dev": {
+    "latte/latte": "^2.3",
+    "phpunit/phpunit": "^5.4",
+    "nette/application": "^2.3"
+  },
+  "suggest": {
+    "latte/latte": "Allows using Texy macros and filters in templates"
+  },
+  "autoload": {
+    "psr-4": {
+      "Lookyman\\NetteTexy\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Lookyman\\NetteTexy\\Tests\\": "tests/NetteTexy/"
+    }
+  }
 }
