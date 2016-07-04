@@ -4,6 +4,7 @@ namespace Lookyman\NetteTexy\DI;
 
 use Lookyman\NetteTexy\Configurator\ConfiguratorInterface;
 use Nette\DI\CompilerExtension;
+use Nette\DI\ContainerBuilder;
 use Nette\DI\ServiceCreationException;
 use Nette\DI\ServiceDefinition;
 use Texy\Texy;
@@ -24,14 +25,8 @@ class TexyExtension extends CompilerExtension
 	{
 		$builder = $this->getContainerBuilder();
 
-		$configurators = $builder->findByTag(self::TAG_CONFIGURATOR);
-		uasort($configurators, function ($a, $b) {
-			$a = is_numeric($a) ? (float) $a : 0;
-			$b = is_numeric($b) ? (float) $b : 0;
-			return $a < $b ? -1 : ($a > $b ? 1 : 0);
-		});
-
 		$texy = $builder->getDefinition($this->prefix('texy'));
+		$configurators = $this->getSortedConfigurators($builder);
 		foreach ($configurators as $name => $priority) {
 			if (!self::isOfType($builder->getDefinition($name)->getClass(), ConfiguratorInterface::class)) {
 				throw new ServiceCreationException();
@@ -55,6 +50,24 @@ class TexyExtension extends CompilerExtension
 		}
 	}
 
+	/**
+	 * @param ContainerBuilder $builder
+	 * @return array
+	 */
+	private function getSortedConfigurators(ContainerBuilder $builder)
+	{
+		$configurators = $builder->findByTag(self::TAG_CONFIGURATOR);
+		uasort($configurators, function ($a, $b) {
+			$a = is_numeric($a) ? (float) $a : 0;
+			$b = is_numeric($b) ? (float) $b : 0;
+			return $a < $b ? -1 : ($a > $b ? 1 : 0);
+		});
+		return $configurators;
+	}
+
+	/**
+	 * @param ServiceDefinition $def
+	 */
 	private function registerToLatte(ServiceDefinition $def)
 	{
 		$def->addSetup('?->onCompile[] = function (Latte\Engine $engine) { (new Texy\Bridges\Latte\TexyMacro($engine, ?))->install(); }', ['@self', $this->prefix('@texy')])

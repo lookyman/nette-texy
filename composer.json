@@ -17,8 +17,9 @@
   },
   "require-dev": {
     "latte/latte": "^2.3",
-    "phpunit/phpunit": "^5.4",
-    "nette/application": "^2.3"
+    "nette/application": "^2.3",
+    "nette/robot-loader": "^2.3",
+    "phpunit/phpunit": "^5.4"
   },
   "suggest": {
     "latte/latte": "Allows using Texy macros and filters in templates"
@@ -26,11 +27,6 @@
   "autoload": {
     "psr-4": {
       "Lookyman\\NetteTexy\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Lookyman\\NetteTexy\\Tests\\": "tests/NetteTexy/"
     }
   }
 }
