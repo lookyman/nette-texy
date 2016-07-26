@@ -23,7 +23,7 @@ Enable the extension in your [NEON](https://ne-on.org/) config:
 
 ```yml
 extensions:
-	texy: lookyman\NetteTexy\DI\TexyExtension
+	texy: Lookyman\NetteTexy\DI\TexyExtension
 ```
 
 Use the Texy macro or helper in your [Latte](https://latte.nette.org/) templates like this:
